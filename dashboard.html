@@ -76,4 +76,91 @@
       background: rgba(255, 255, 255, 0.1);
       border-radius: 15px;
       padding: 1.5rem;
-      margin: 1rem
+      margin: 1rem 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .card img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .logout-btn {
+      background: #ff4d4d;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .logout-btn:hover {
+      background: #e60000;
+    }
+
+    @media (max-width: 768px) {
+      .content {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <button class="hamburger" id="hamburgerBtn">☰</button>
+    <h2>GrowWithMe Dashboard</h2>
+  </div>
+
+  <div class="sidebar" id="sidebar">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="profile.html">My Profile</a>
+    <a href="#">My Earnings</a>
+    <a href="#">Withdrawals</a>
+    <a href="#" onclick="logout()">Logout</a>
+  </div>
+
+  <div class="content">
+    <h1>Welcome, <span id="userName">User</span>!</h1>
+
+    <div class="card">
+      <img src="https://source.unsplash.com/400x200/?growth,money" alt="Growth Image">
+      <h3>Your Growth Journey Begins Here</h3>
+      <p>Track your performance, earnings, and manage your account smoothly.</p>
+    </div>
+
+    <div class="card">
+      <h3>Quick Tips</h3>
+      <ul>
+        <li>Keep your profile updated.</li>
+        <li>Withdraw earnings anytime.</li>
+        <li>Explore new features soon!</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const sidebar = document.getElementById("sidebar");
+    const hamburgerBtn = document.getElementById("hamburgerBtn");
+
+    hamburgerBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("active");
+    });
+
+    function logout() {
+      localStorage.removeItem("loggedInName");
+      localStorage.removeItem("loggedInEmail");
+      window.location.href = "index.html";
+    }
+
+    // Set user name
+    const name = localStorage.getItem("loggedInName");
+    document.getElementById("userName").textContent = name ? name : "User";
+  </script>
+
+</body>
+</html>
