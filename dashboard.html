@@ -1,166 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard - GrowWithMe</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #2193b0, #0a3d62);
-      color: white;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GrowWithMe Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    .navbar {
-      background: #0a3d62;
-      padding: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+      color: white;
+      min-height: 100vh;
+    }
 
-    .hamburger {
-      font-size: 1.8rem;
-      cursor: pointer;
-      border: none;
-      background: none;
-      color: white;
-    }
+    .header {
+      background: #1e3c72;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: -250px;
-      width: 250px;
-      height: 100%;
-      background: #112d4e;
-      padding-top: 60px;
-      transition: 0.3s;
-      overflow-y: auto;
-      z-index: 1000;
-    }
+    .hamburger {
+      font-size: 1.5rem;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: white;
+    }
 
-    .sidebar.active {
-      left: 0;
-    }
+    .sidebar {
+      background: #112233;
+      width: 200px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: -220px;
+      padding-top: 60px;
+      transition: left 0.3s ease;
+    }
 
-    .sidebar a {
-      display: block;
-      padding: 15px 25px;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.2s;
-    }
+    .sidebar.active {
+      left: 0;
+    }
 
-    .sidebar a:hover {
-      background: #0a3d62;
-    }
+    .sidebar a {
+      display: block;
+      padding: 15px 20px;
+      color: white;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
 
-    .content {
-      padding: 2rem;
-      transition: margin-left 0.3s;
-      margin-left: 0;
-    }
+    .sidebar a:hover {
+      background-color: #1e3c72;
+    }
 
-    .sidebar.active ~ .content {
-      margin-left: 250px;
-    }
+    .content {
+      margin-left: 20px;
+      padding: 20px;
+    }
 
-    h1 {
-      margin-top: 0;
-    }
+    @media (min-width: 768px) {
+      .sidebar {
+        left: 0;
+      }
 
-    .card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      padding: 1.5rem;
-      margin: 1rem 0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
+      .hamburger {
+        display: none;
+      }
 
-    .card img {
-      width: 100%;
-      max-height: 200px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
+      .content {
+        margin-left: 220px;
+      }
+    }
 
-    .logout-btn {
-      background: #ff4d4d;
-      border: none;
-      padding: 10px 20px;
-      color: white;
-      font-weight: bold;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
 
-    .logout-btn:hover {
-      background: #e60000;
-    }
-
-    @media (max-width: 768px) {
-      .content {
-        padding: 1rem;
-      }
-    }
-  </style>
+    .welcome {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
 
-  <div class="navbar">
-    <button class="hamburger" id="hamburgerBtn">☰</button>
-    <h2>GrowWithMe Dashboard</h2>
-  </div>
+  <div class="header">
+    <button class="hamburger" id="hamburger">&#9776;</button>
+    <h2>GrowWithMe Dashboard</h2>
+  </div>
 
-  <div class="sidebar" id="sidebar">
-    <a href="dashboard.html">Dashboard</a>
-    <a href="profile.html">My Profile</a>
-    <a href="#">My Earnings</a>
-    <a href="#">Withdrawals</a>
-    <a href="#" onclick="logout()">Logout</a>
-  </div>
+  <div class="sidebar" id="sidebar">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="profile.html">My Profile</a>
+    <a href="#">My Earnings</a>
+    <a href="#">Withdrawals</a>
+    <a href="index.html">Logout</a>
+  </div>
 
-  <div class="content">
-    <h1>Welcome, <span id="userName">User</span>!</h1>
+  <div class="content">
+    <div class="welcome">
+      <h1>Welcome, Sahil Khachi!</h1>
+      <img src="https://via.placeholder.com/300x150.png?text=Growth+Image" alt="Growth Image">
+      <h2>Your Growth Journey Begins Here</h2>
+      <p>Track your performance, earnings, and manage your account smoothly.</p>
+    </div>
 
-    <div class="card">
-      <img src="https://source.unsplash.com/400x200/?growth,money" alt="Growth Image">
-      <h3>Your Growth Journey Begins Here</h3>
-      <p>Track your performance, earnings, and manage your account smoothly.</p>
-    </div>
+    <div class="quick-tips">
+      <h3>Quick Tips</h3>
+      <ul>
+        <li>Keep your profile updated.</li>
+        <li>Withdraw earnings anytime.</li>
+        <li>Explore more features on your dashboard.</li>
+      </ul>
+    </div>
+  </div>
 
-    <div class="card">
-      <h3>Quick Tips</h3>
-      <ul>
-        <li>Keep your profile updated.</li>
-        <li>Withdraw earnings anytime.</li>
-        <li>Explore new features soon!</li>
-      </ul>
-    </div>
-  </div>
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const sidebar = document.getElementById('sidebar');
 
-  <script>
-    const sidebar = document.getElementById("sidebar");
-    const hamburgerBtn = document.getElementById("hamburgerBtn");
-
-    hamburgerBtn.addEventListener("click", () => {
-      sidebar.classList.toggle("active");
-    });
-
-    function logout() {
-      localStorage.removeItem("loggedInName");
-      localStorage.removeItem("loggedInEmail");
-      window.location.href = "index.html";
-    }
-
-    // Set user name
-    const name = localStorage.getItem("loggedInName");
-    document.getElementById("userName").textContent = name ? name : "User";
-  </script>
+    hamburger.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+    });
+  </script>
 
 </body>
 </html>
