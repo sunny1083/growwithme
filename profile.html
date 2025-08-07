@@ -31,25 +31,37 @@
       width: 100%;
     }
 
-    .profile-info {
-      margin-bottom: 1.5rem;
-    }
-
     .profile-info label {
       font-weight: bold;
       display: block;
       margin-bottom: 0.5rem;
     }
 
-    .profile-info span {
-      display: block;
+    .profile-info span, .profile-info input {
       font-size: 1.1rem;
       margin-bottom: 1rem;
+      display: block;
+      width: 100%;
+      color: #fff;
     }
 
-    .back-btn {
-      background: #ffffff;
-      color: #0a3d62;
+    input[type="text"], input[type="email"] {
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    button {
       padding: 10px 20px;
       font-weight: bold;
       border: none;
@@ -58,8 +70,31 @@
       transition: background 0.3s;
     }
 
-    .back-btn:hover {
+    .edit-btn {
+      background: #ffffff;
+      color: #0a3d62;
+    }
+
+    .edit-btn:hover {
       background: #d1ecf1;
+    }
+
+    .save-btn {
+      background: #28a745;
+      color: white;
+    }
+
+    .save-btn:hover {
+      background: #218838;
+    }
+
+    .cancel-btn {
+      background: #dc3545;
+      color: white;
+    }
+
+    .cancel-btn:hover {
+      background: #c82333;
     }
   </style>
 </head>
@@ -71,25 +106,84 @@
     <div class="profile-info">
       <label>Name:</label>
       <span id="profileName">Loading...</span>
+      <input type="text" id="editName" style="display: none;" />
 
       <label>Email:</label>
       <span id="profileEmail">Loading...</span>
+      <input type="email" id="editEmail" style="display: none;" />
     </div>
 
-    <button class="back-btn" onclick="goBack()">← Back to Dashboard</button>
+    <div class="btn-group">
+      <button class="edit-btn" onclick="enableEdit()">Edit Profile</button>
+      <button class="save-btn" onclick="saveProfile()" style="display: none;">Save</button>
+      <button class="cancel-btn" onclick="cancelEdit()" style="display: none;">Cancel</button>
+    </div>
+
+    <div style="margin-top: 1.5rem; text-align: center;">
+      <button class="edit-btn" onclick="goBack()">← Back to Dashboard</button>
+    </div>
   </div>
 
   <script>
-    // Load from localStorage
-    const name = localStorage.getItem("loggedInName");
-    const email = localStorage.getItem("loggedInEmail");
+    let name = localStorage.getItem("loggedInName") || "N/A";
+    let email = localStorage.getItem("loggedInEmail") || "N/A";
 
-    document.getElementById("profileName").textContent = name || "N/A";
-    document.getElementById("profileEmail").textContent = email || "N/A";
+    const nameSpan = document.getElementById("profileName");
+    const emailSpan = document.getElementById("profileEmail");
+    const nameInput = document.getElementById("editName");
+    const emailInput = document.getElementById("editEmail");
+
+    function displayProfile() {
+      nameSpan.textContent = name;
+      emailSpan.textContent = email;
+      nameInput.value = name;
+      emailInput.value = email;
+    }
+
+    function enableEdit() {
+      nameSpan.style.display = "none";
+      emailSpan.style.display = "none";
+      nameInput.style.display = "block";
+      emailInput.style.display = "block";
+
+      document.querySelector(".save-btn").style.display = "inline-block";
+      document.querySelector(".cancel-btn").style.display = "inline-block";
+      document.querySelector(".edit-btn").style.display = "none";
+    }
+
+    function cancelEdit() {
+      nameInput.style.display = "none";
+      emailInput.style.display = "none";
+      nameSpan.style.display = "block";
+      emailSpan.style.display = "block";
+
+      document.querySelector(".save-btn").style.display = "none";
+      document.querySelector(".cancel-btn").style.display = "none";
+      document.querySelector(".edit-btn").style.display = "inline-block";
+    }
+
+    function saveProfile() {
+      const newName = nameInput.value.trim();
+      const newEmail = emailInput.value.trim();
+
+      if (newName && newEmail) {
+        localStorage.setItem("loggedInName", newName);
+        localStorage.setItem("loggedInEmail", newEmail);
+        name = newName;
+        email = newEmail;
+        displayProfile();
+        cancelEdit();
+      } else {
+        alert("Both name and email are required.");
+      }
+    }
 
     function goBack() {
       window.location.href = "dashboard.html";
     }
+
+    // Initialize
+    displayProfile();
   </script>
 </body>
 </html>
