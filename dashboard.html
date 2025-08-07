@@ -112,12 +112,12 @@
   <div class="main-content">
     <div id="dashboard" class="content-section active">
       <h1>Dashboard</h1>
-      <div class="card">Welcome to your dashboard, Eva! Here you can manage your account, view earnings, and more.</div>
+      <div class="card" id="dashboardWelcome"></div>
     </div>
 
     <div id="profile" class="content-section">
       <h1>Profile</h1>
-      <div class="card">Name: Eva Sedan<br>Email: eva@example.com<br>Phone: +91-9876543210</div>
+      <div class="card" id="profileDetails"></div>
     </div>
 
     <div id="earnings" class="content-section">
@@ -162,6 +162,17 @@
         document.getElementById(tab.dataset.tab).classList.add('active');
       });
     });
+
+    // Get user from localStorage
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+    if (loggedInUser) {
+      document.getElementById("dashboardWelcome").innerText = `Welcome to your dashboard, ${loggedInUser.email}! Here you can manage your account, view earnings, and more.`;
+      document.getElementById("profileDetails").innerHTML = `Name: ${loggedInUser.email.split('@')[0]}<br>Email: ${loggedInUser.email}<br>Phone: Not set`;
+    } else {
+      document.getElementById("dashboardWelcome").innerText = "User data not found. Please login again.";
+      document.getElementById("profileDetails").innerText = "No profile data available.";
+    }
   </script>
 
 </body>
