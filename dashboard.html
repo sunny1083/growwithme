@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GrowWithMe Dashboard</title>
   <style>
     * {
@@ -16,6 +16,7 @@
       background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
       color: white;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     .header {
@@ -24,6 +25,10 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
     }
 
     .hamburger {
@@ -36,13 +41,14 @@
 
     .sidebar {
       background: #112233;
-      width: 200px;
+      width: 220px;
       height: 100vh;
       position: fixed;
       top: 0;
       left: -220px;
       padding-top: 60px;
       transition: left 0.3s ease;
+      z-index: 9;
     }
 
     .sidebar.active {
@@ -62,17 +68,16 @@
     }
 
     .content {
-      margin-left: 20px;
-      padding: 20px;
+      padding: 100px 20px 20px 20px;
     }
 
     @media (min-width: 768px) {
-      .sidebar {
-        left: 0;
-      }
-
       .hamburger {
         display: none;
+      }
+
+      .sidebar {
+        left: 0;
       }
 
       .content {
@@ -129,6 +134,13 @@
 
     hamburger.addEventListener('click', () => {
       sidebar.classList.toggle('active');
+    });
+
+    // Optional: close sidebar on outside click (mobile only)
+    document.addEventListener('click', function(event) {
+      if (!sidebar.contains(event.target) && !hamburger.contains(event.target)) {
+        sidebar.classList.remove('active');
+      }
     });
   </script>
 
