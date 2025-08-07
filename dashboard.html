@@ -164,7 +164,7 @@
 
   <div class="content">
     <div class="welcome">
-      <h1>Welcome, Sahil Khachi</h1>
+      <h1>Welcome, <span id="userName">User</span></h1>
       <p>Your personalized dashboard to grow and manage your profile</p>
     </div>
 
@@ -209,6 +209,10 @@
         sidebar.classList.remove('active');
       }
     });
+
+    // ✅ Show logged-in user's name from localStorage
+    const storedName = localStorage.getItem("name") || "User";
+    document.getElementById("userName").innerText = storedName;
   </script>
 
 </body>
