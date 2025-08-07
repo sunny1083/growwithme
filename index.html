@@ -99,6 +99,7 @@
   <!-- Sign Up Form -->
   <div class="container" id="signupCard" style="display:none;">
     <h2>Create Your Account</h2>
+    <input type="text" id="signupName" placeholder="Full Name" />
     <input type="email" id="signupEmail" placeholder="Email" />
     <input type="password" id="signupPassword" placeholder="Password" />
     <button onclick="handleSignup()">Sign Up</button>
@@ -116,28 +117,31 @@
       document.getElementById("loginCard").style.display = "block";
     }
 
+    function handleSignup() {
+      const name = document.getElementById("signupName").value;
+      const email = document.getElementById("signupEmail").value;
+      const password = document.getElementById("signupPassword").value;
+
+      if (name && email && password) {
+        // Save name associated with email
+        localStorage.setItem("user_" + email, name);
+        alert("Signup successful! Please login.");
+        showLogin();
+      } else {
+        alert("Please enter name, email, and password to sign up.");
+      }
+    }
+
     function handleLogin() {
       const email = document.getElementById("loginEmail").value;
       const password = document.getElementById("loginPassword").value;
 
       if (email && password) {
-        // Save email to localStorage so dashboard can use it
-        localStorage.setItem("loggedInEmail", email);
+        const name = localStorage.getItem("user_" + email) || email;
+        localStorage.setItem("loggedInUserName", name);
         window.location.href = "dashboard.html"; // Redirect to dashboard
       } else {
         alert("Please enter both email and password.");
-      }
-    }
-
-    function handleSignup() {
-      const email = document.getElementById("signupEmail").value;
-      const password = document.getElementById("signupPassword").value;
-
-      if (email && password) {
-        alert("Signup successful! Please login.");
-        showLogin();
-      } else {
-        alert("Please enter email and password to sign up.");
       }
     }
   </script>
