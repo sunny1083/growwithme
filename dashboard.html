@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GrowWithMe Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a2e8f1a44f.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     * {
       margin: 0;
@@ -58,12 +58,18 @@
     }
 
     .sidebar a {
-      display: block;
+      display: flex;
+      align-items: center;
       padding: 16px 20px;
       color: white;
       text-decoration: none;
       font-size: 1.1rem;
       transition: background 0.3s;
+    }
+
+    .sidebar a i {
+      margin-right: 12px;
+      width: 20px;
     }
 
     .sidebar a:hover {
@@ -149,10 +155,10 @@
   </div>
 
   <div class="sidebar" id="sidebar">
-    <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
-    <a href="profile.html"><i class="fas fa-user-circle"></i> My Profile</a>
+    <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="profile.html"><i class="fas fa-user"></i> My Profile</a>
     <a href="#"><i class="fas fa-wallet"></i> My Earnings</a>
-    <a href="#"><i class="fas fa-money-bill-wave"></i> Withdrawals</a>
+    <a href="#"><i class="fas fa-money-check-alt"></i> Withdrawals</a>
     <a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
   </div>
 
