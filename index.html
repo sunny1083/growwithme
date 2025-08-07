@@ -121,7 +121,8 @@
       const password = document.getElementById("loginPassword").value;
 
       if (email && password) {
-        // You can add real auth here later
+        // Save email to localStorage so dashboard can use it
+        localStorage.setItem("loggedInEmail", email);
         window.location.href = "dashboard.html"; // Redirect to dashboard
       } else {
         alert("Please enter both email and password.");
