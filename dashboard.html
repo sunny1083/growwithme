@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GrowWithMe - Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      background-color: #f1f5f9;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      background-color: #1e293b;
+      color: #fff;
+      padding-top: 30px;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.7rem;
+      color: #38bdf8;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      padding: 15px 20px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .sidebar ul li:hover,
+    .sidebar ul li.active {
+      background-color: #334155;
+    }
+
+    /* Content */
+    .main-content {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .content-section {
+      display: none;
+    }
+
+    .content-section.active {
+      display: block;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #1e293b;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+      .main-content {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2>GrowWithMe</h2>
+    <ul>
+      <li class="tab-link active" data-tab="dashboard">📊 Dashboard</li>
+      <li class="tab-link" data-tab="profile">👤 Profile</li>
+      <li class="tab-link" data-tab="earnings">💸 My Earnings</li>
+      <li class="tab-link" data-tab="withdrawal">🏧 Withdrawals</li>
+      <li class="tab-link" data-tab="referrals">🤝 Referrals</li>
+      <li class="tab-link" data-tab="settings">⚙️ Settings</li>
+      <li class="tab-link" data-tab="help">❓ Help & Support</li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <div id="dashboard" class="content-section active">
+      <h1>Dashboard</h1>
+      <div class="card">Welcome to your dashboard, Eva! Here you can manage your account, view earnings, and more.</div>
+    </div>
+
+    <div id="profile" class="content-section">
+      <h1>Profile</h1>
+      <div class="card">Name: Eva Sedan<br>Email: eva@example.com<br>Phone: +91-9876543210</div>
+    </div>
+
+    <div id="earnings" class="content-section">
+      <h1>My Earnings</h1>
+      <div class="card">Total Earnings: ₹12,500<br>Pending: ₹2,000<br>Paid: ₹10,500</div>
+    </div>
+
+    <div id="withdrawal" class="content-section">
+      <h1>Withdrawals</h1>
+      <div class="card">Last Withdrawn: ₹1,000 on Aug 5, 2025<br>Status: Completed</div>
+    </div>
+
+    <div id="referrals" class="content-section">
+      <h1>Referrals</h1>
+      <div class="card">Referral Code: <strong>GROW123</strong><br>Total Referrals: 10<br>Bonus Earned: ₹1,500</div>
+    </div>
+
+    <div id="settings" class="content-section">
+      <h1>Settings</h1>
+      <div class="card">Account Settings, Notifications, and Password Management (Coming Soon)</div>
+    </div>
+
+    <div id="help" class="content-section">
+      <h1>Help & Support</h1>
+      <div class="card">For any queries, contact support@growwithme.in or call 1800-123-456.</div>
+    </div>
+
+    <div class="footer">
+      &copy; 2025 GrowWithMe. All rights reserved.
+    </div>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab-link');
+    const sections = document.querySelectorAll('.content-section');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        sections.forEach(s => s.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
