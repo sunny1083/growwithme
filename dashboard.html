@@ -74,7 +74,7 @@
 
     .container {
       padding: 100px 20px 20px;
-      max-width: 800px;
+      max-width: 1000px;
       margin: auto;
       transition: margin-left 0.3s ease;
     }
@@ -85,11 +85,49 @@
       border-radius: 20px;
       text-align: center;
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      margin-bottom: 30px;
     }
 
-    h1 {
-      font-size: 28px;
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .feature-box {
+      background-color: rgba(255, 255, 255, 0.1);
+      width: 220px;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .feature-box:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .feature-box img {
+      width: 60px;
+      height: 60px;
       margin-bottom: 10px;
+    }
+
+    .welcome-img {
+      width: 100%;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      max-height: 300px;
+      object-fit: cover;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      font-size: 14px;
+      color: #ccc;
     }
 
     @media (min-width: 769px) {
@@ -121,10 +159,37 @@
 
   <!-- Main Content -->
   <div class="container" id="main">
+    <!-- Welcome Banner -->
+    <img src="https://source.unsplash.com/1000x300/?growth,success,technology" alt="Welcome" class="welcome-img"/>
+
+    <!-- Welcome Message -->
     <div class="card">
       <h1>Welcome, <span id="userName">User</span> 👋</h1>
-      <p>You’re now logged in to your GrowWithMe dashboard.</p>
+      <p>"Your growth journey begins here. Stay consistent, stay motivated."</p>
     </div>
+
+    <!-- Features -->
+    <div class="features">
+      <div class="feature-box">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile" />
+        <h3>My Profile</h3>
+        <p>Edit your details and keep your info updated.</p>
+      </div>
+
+      <div class="feature-box">
+        <img src="https://cdn-icons-png.flaticon.com/512/2331/2331970.png" alt="Earnings" />
+        <h3>My Earnings</h3>
+        <p>Track your rewards, commissions and growth.</p>
+      </div>
+
+      <div class="feature-box">
+        <img src="https://cdn-icons-png.flaticon.com/512/929/929430.png" alt="Withdraw" />
+        <h3>Withdraw</h3>
+        <p>Secure and quick withdrawal to your bank.</p>
+      </div>
+    </div>
+
+    <footer>© 2025 GrowWithMe. All rights reserved.</footer>
   </div>
 
   <script>
