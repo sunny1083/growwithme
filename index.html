@@ -3,147 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GrowWithMe - Login / Sign Up</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #2193b0, #6dd5ed);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-
-    .container {
-      background: white;
-      padding: 2.5rem;
-      border-radius: 20px;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-      width: 90%;
-      max-width: 400px;
-      text-align: center;
-      animation: fadeIn 0.6s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    h2 {
-      color: #007bff;
-      margin-bottom: 1.5rem;
-      font-weight: 700;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      outline: none;
-      transition: 0.3s ease;
-    }
-
-    input:focus {
-      border-color: #007bff;
-      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    }
-
-    button {
-      background: #007bff;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      margin-top: 15px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 1em;
-      font-weight: bold;
-      transition: 0.3s ease;
-      width: 100%;
-    }
-
-    button:hover {
-      background: #0056b3;
-    }
-
-    .switch-btn {
-      margin-top: 14px;
-      font-size: 0.9em;
-      color: #007bff;
-      background: none;
-      border: none;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-
-    .switch-btn:hover {
-      color: #0056b3;
-    }
-  </style>
+  <title>Login - GrowWithMe</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-
-  <!-- Login Form -->
-  <div class="container" id="loginCard">
-    <h2>Login to GrowWithMe</h2>
-    <input type="email" id="loginEmail" placeholder="Email" />
-    <input type="password" id="loginPassword" placeholder="Password" />
-    <button onclick="handleLogin()">Login</button>
-    <button class="switch-btn" onclick="showSignup()">Don't have an account? Sign Up</button>
-  </div>
-
-  <!-- Sign Up Form -->
-  <div class="container" id="signupCard" style="display:none;">
-    <h2>Create Your Account</h2>
-    <input type="text" id="signupName" placeholder="Full Name" />
-    <input type="email" id="signupEmail" placeholder="Email" />
-    <input type="password" id="signupPassword" placeholder="Password" />
-    <button onclick="handleSignup()">Sign Up</button>
-    <button class="switch-btn" onclick="showLogin()">Already have an account? Login</button>
+  <div class="container">
+    <h1>GrowWithMe</h1>
+    <h2>Login</h2>
+    <form id="loginForm">
+      <input type="email" id="loginEmail" placeholder="Email" required />
+      <input type="password" id="loginPassword" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="signup.html">Sign up</a></p>
   </div>
 
   <script>
-    function showSignup() {
-      document.getElementById("loginCard").style.display = "none";
-      document.getElementById("signupCard").style.display = "block";
-    }
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
 
-    function showLogin() {
-      document.getElementById("signupCard").style.display = "none";
-      document.getElementById("loginCard").style.display = "block";
-    }
-
-    function handleSignup() {
-      const name = document.getElementById("signupName").value;
-      const email = document.getElementById("signupEmail").value;
-      const password = document.getElementById("signupPassword").value;
-
-      if (name && email && password) {
-        // Save name associated with email
-        localStorage.setItem("user_" + email, name);
-        alert("Signup successful! Please login.");
-        showLogin();
-      } else {
-        alert("Please enter name, email, and password to sign up.");
-      }
-    }
-
-    function handleLogin() {
       const email = document.getElementById("loginEmail").value;
       const password = document.getElementById("loginPassword").value;
 
-      if (email && password) {
-        const name = localStorage.getItem("user_" + email) || email;
-        localStorage.setItem("loggedInUserName", name);
-        window.location.href = "dashboard.html"; // Redirect to dashboard
+      const storedEmail = localStorage.getItem("email");
+      const storedPassword = localStorage.getItem("password");
+      const storedName = localStorage.getItem("name");
+
+      if (email === storedEmail && password === storedPassword) {
+        localStorage.setItem("loggedInName", storedName); // For dashboard
+        window.location.href = "dashboard.html";
       } else {
-        alert("Please enter both email and password.");
+        alert("Invalid email or password.");
       }
-    }
+    });
   </script>
 </body>
 </html>
