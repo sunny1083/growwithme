@@ -1,62 +1,219 @@
-<!-- KEEP EVERYTHING ABOVE AS IS -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GrowWithMe Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    <footer>
-      &copy; 2025 GrowWithMe. All rights reserved.
-    </footer>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: white;
+      min-height: 100vh;
+    }
 
-    <!-- Earnings Section -->
-    <div style="margin-top: 50px;">
-      <h2 style="text-align: center; margin-bottom: 20px;">Your Earnings</h2>
-      <div style="max-width: 800px; margin: 0 auto; background-color: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px;">
-        <table style="width: 100%; border-collapse: collapse; color: #fff;">
-          <thead>
-            <tr style="border-bottom: 1px solid #444;">
-              <th style="text-align: left; padding: 10px;">Date</th>
-              <th style="text-align: left; padding: 10px;">Source</th>
-              <th style="text-align: left; padding: 10px;">Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="padding: 10px;">2025-08-01</td>
-              <td style="padding: 10px;">Referral Bonus</td>
-              <td style="padding: 10px;">₹200</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px;">2025-08-05</td>
-              <td style="padding: 10px;">Task Completion</td>
-              <td style="padding: 10px;">₹150</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px;">2025-08-07</td>
-              <td style="padding: 10px;">Affiliate Program</td>
-              <td style="padding: 10px;">₹300</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    .header {
+      background: #1e3c72;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
 
-  </div> <!-- closes .content -->
+    .hamburger {
+      font-size: 1.5rem;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: white;
+    }
 
-  <script>
-    const hamburger = document.getElementById('hamburger');
-    const sidebar = document.getElementById('sidebar');
+    .sidebar {
+      background: #112233;
+      width: 240px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: -240px;
+      padding-top: 60px;
+      transition: left 0.3s ease;
+      z-index: 9;
+    }
 
-    hamburger.addEventListener('click', () => {
-      sidebar.classList.toggle('active');
-    });
+    .sidebar.active {
+      left: 0;
+    }
 
-    document.addEventListener('click', function(event) {
-      if (!sidebar.contains(event.target) && !hamburger.contains(event.target)) {
-        sidebar.classList.remove('active');
-      }
-    });
+    .sidebar a {
+      display: flex;
+      align-items: center;
+      padding: 16px 20px;
+      color: white;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: background 0.3s;
+    }
 
-    // ✅ Display stored user name
-    const storedName = localStorage.getItem("name") || "User";
-    document.getElementById("userName").innerText = storedName;
-  </script>
+    .sidebar a i {
+      margin-right: 12px;
+      width: 20px;
+    }
+
+    .sidebar a:hover {
+      background-color: #1e3c72;
+    }
+
+    .content {
+      padding: 100px 20px 20px;
+    }
+
+    @media (min-width: 768px) {
+      .hamburger {
+        display: none;
+      }
+
+      .sidebar {
+        left: 0;
+      }
+
+      .content {
+        margin-left: 240px;
+      }
+    }
+
+    .welcome {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .welcome h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .dashboard-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      padding: 0 10px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card i {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #00c6ff;
+    }
+
+    .card h3 {
+      margin: 10px 0 5px;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #bbb;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <button class="hamburger" id="hamburger">&#9776;</button>
+    <h2>GrowWithMe Dashboard</h2>
+  </div>
+
+  <div class="sidebar" id="sidebar">
+    <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="profile.html"><i class="fas fa-user"></i> My Profile</a>
+    <a href="#"><i class="fas fa-wallet"></i> My Earnings</a>
+    <a href="#"><i class="fas fa-money-check-alt"></i> Withdrawals</a>
+    <a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  </div>
+
+  <div class="content">
+    <div class="welcome">
+      <h1>Welcome, <span id="userName">User</span></h1>
+      <p>Your personalized dashboard to grow and manage your profile</p>
+    </div>
+
+    <div class="dashboard-cards">
+      <div class="card">
+        <i class="fas fa-chart-line"></i>
+        <h3>Progress</h3>
+        <p>Track your growth and performance.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-coins"></i>
+        <h3>Earnings</h3>
+        <p>Check your current earnings in real-time.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-user-edit"></i>
+        <h3>Edit Profile</h3>
+        <p>Update your personal information.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-paper-plane"></i>
+        <h3>Withdraw</h3>
+        <p>Send withdrawal requests instantly.</p>
+      </div>
+    </div>
+
+    <footer>
+      &copy; 2025 GrowWithMe. All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const sidebar = document.getElementById('sidebar');
+
+    hamburger.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+    });
+
+    document.addEventListener('click', function(event) {
+      if (!sidebar.contains(event.target) && !hamburger.contains(event.target)) {
+        sidebar.classList.remove('active');
+      }
+    });
+
+    // ✅ Display stored user name
+    const storedName = localStorage.getItem("name") || "User";
+    document.getElementById("userName").innerText = storedName;
+  </script>
 
 </body>
-</html>
+  </html>
