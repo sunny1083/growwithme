@@ -1,0 +1,36 @@
+<!-- Payment Section -->
+<div style="text-align:center; margin-top:30px;">
+  <h2 class="text-2xl font-bold mb-4">💳 Make a Payment</h2>
+  <p class="mb-6">Click below to pay securely using Razorpay</p>
+  
+  <!-- Payment Button -->
+  <button id="rzp-button" 
+          style="padding: 12px 24px; background: #6C63FF; color: #fff; 
+                 border: none; border-radius: 10px; font-size: 16px; cursor: pointer;">
+    Pay Now
+  </button>
+</div>
+
+<!-- Razorpay Script -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  var options = {
+    "key": "rzp_test_123456789", // 🔑 Replace with your Razorpay Key ID
+    "amount": 10000, // Amount in paise (10000 = ₹100)
+    "currency": "INR",
+    "name": "GrowWithMe",
+    "description": "Test Transaction",
+    "image": "https://yourlogo.com/logo.png", // optional
+    "handler": function (response){
+        alert("✅ Payment Successful! Payment ID: " + response.razorpay_payment_id);
+    },
+    "theme": {
+        "color": "#6C63FF"
+    }
+  };
+  var rzp1 = new Razorpay(options);
+  document.getElementById('rzp-button').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+  }
+</script>
